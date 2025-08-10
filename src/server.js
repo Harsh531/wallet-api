@@ -1,3 +1,7 @@
+import cors from "cors";
+
+
+
 import express from "express";
 import dotenv from "dotenv";
 import { initDB, sql } from "./config/db.js";
@@ -12,6 +16,7 @@ const app = express();
 if (process.env.NODE_ENV === "production") job.start();
 
 // Middleware
+app.use(cors());
 app.use(rateLimiter);
 app.use(express.json());
 app.use((req, res, next) => {
