@@ -3,10 +3,13 @@ import dotenv from "dotenv";
 import { initDB, sql } from "./config/db.js";
 import rateLimiter from "./middleware/rateLimiter.js";
 import transactionRoute from "./routes/transactionRoute.js";
+import job from "./config/cron.js";
 
 dotenv.config();
 
 const app = express();
+
+if (process.env.NODE_ENV === "production") job.start();
 
 // Middleware
 app.use(rateLimiter);
